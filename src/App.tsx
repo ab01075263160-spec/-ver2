@@ -29,7 +29,11 @@ export default function App() {
         setError('성경 구절을 찾을 수 없습니다. 정확한 장과 절을 입력해 주세요.');
       }
     } catch (err) {
-      setError('검색 중 오류가 발생했습니다.');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('검색 중 오류가 발생했습니다.');
+      }
     } finally {
       setIsLoading(false);
     }
